@@ -1,0 +1,9 @@
+
+# dependencies
+/node_modules
+
+# production
+/dest/static
+
+# misc.
+package-lock.json
