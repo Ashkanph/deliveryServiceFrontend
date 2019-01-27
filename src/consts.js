@@ -27,5 +27,6 @@ const restAPIS = {
 restAPIS.queryAddress   = restAPIS.mainAddress  + "api/v1.0.0/";
 restAPIS.login          = restAPIS.queryAddress + "login";
 restAPIS.shipments      = restAPIS.queryAddress + "shipments";
+restAPIS.bikers         = restAPIS.queryAddress + "bikers";
 
 export {restAPIS};

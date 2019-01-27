@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {setShipments, userInfo} from "../../store/actions/data";
+import {setShipments, setBikers, userInfo} from "../../store/actions/data";
 import {ajaxQS} from "../../functions/ajax";
 import { showErrorMessage, 
           showErrorStatusMessage } from "../../functions/notificationHandling";
@@ -18,12 +18,17 @@ class Shipments extends Component {
           {
             authorization: "JWT " + userInfo().token
           }, (result)=>{
-            console.warn(result);
-            
               if(result.status === 0){
-                  setShipments({
-                      shipments: result.Shipments
-                  });
+                  setShipments(result.shipments);
+              }else
+                  showErrorStatusMessage(result.status);
+          });
+    ajaxQS("bikers", "GET", null, 
+          {
+            authorization: "JWT " + userInfo().token
+          }, (result)=>{
+              if(result.status === 0){
+                  setBikers(result.bikers);
               }else
                   showErrorStatusMessage(result.status);
           });

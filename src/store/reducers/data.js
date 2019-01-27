@@ -1,8 +1,7 @@
 
 export default function reducer(
     state = {
-      user: null,
-      loggedIn: false
+      user: null
     },
     action) {
       switch (action.type) {
@@ -11,6 +10,9 @@ export default function reducer(
         }
         case "shipments": {
           return Object.assign({}, state, { shipments: action.data });
+        }
+        case "bikers": {
+          return Object.assign({}, state, { bikers: action.data });
         }
         default: {
           return state;

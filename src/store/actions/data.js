@@ -23,6 +23,13 @@ export function setShipments(data) {
   });
 }
 
+export function setBikers(data) {
+  store.dispatch({
+    type: "bikers",
+    data: data
+  });
+}
+
 export function logout() {
   if(store.getState().data.user == null){
     console.log('No user in store! logout.');
