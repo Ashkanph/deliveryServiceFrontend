@@ -1,0 +1,24 @@
+
+*{
+    font-family: 'Lato';
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  html{
+    font-size: 15px;
+  }
+  
+  @font-face {
+    font-family: "Vazir";
+    src: url('/static/assets/fonts/Vazir-Light-v16.woff');
+    font-weight: normal;
+    font-style: normal
+  }

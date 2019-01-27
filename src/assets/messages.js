@@ -2,18 +2,27 @@ export default {
   dontHaveAccess: {
     en: "You don't have access to this page."
   },
+  fillTheForm: {
+    en: "Please fill the form."
+  },
   errStatusMsg: {
+    "0": {
+      en: "successful"
+    },
     "1": {
-      en: "Server Error"
+      en: "Authorization failed (You don't have access to this page or your session has been expired)"
     },
     "2": {
-      en: "Database Error"
+      en: "Username or password is wrong."
     },
     "3": {
-      en: "Server is busy"
+      en: "Username and password are required."
+    },
+    "4": {
+      en: "Undefined error."
     },
     default: {
-      en: "An error occurred"
+      en: "An error with undefined status occurred."
     }
   }
 };

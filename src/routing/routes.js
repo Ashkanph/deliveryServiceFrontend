@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { getPropertyValue } from "../functions/common";
-import Login from "./routes/login";
 import { checkAccess } from "../functions/access";
 import { store } from "../store/store";
 import { showErrorMessage } from "../functions/notificationHandling";
-// import {handleSideBar} from "../store/actions/view";
 import {pages} from "../consts";
+import {userInfo} from "../store/actions/data";
+
+import Login from "./routes/login";
+import Parcels from "./routes/parcels";
+import Shipments from "./routes/shipments";
+
 
 class Routes extends Component {
 
@@ -16,8 +20,10 @@ class Routes extends Component {
         <LoginRoute   path="/" exact component={Login} />
         <LoginRoute   path={pages.login.hash} exact component={Login} />
 
-        {/* <PrivateRoute pageName="users"
-                      path={pages.users.hash} component={Users} /> */}
+        <PrivateRoute pageName="parcels"
+                      path={pages.parcels.hash} component={Parcels} />
+        <PrivateRoute pageName="shipments"
+                      path={pages.shipments.hash} component={Shipments} />
       </Switch>
     );
   }
@@ -25,12 +31,14 @@ class Routes extends Component {
 
 const PrivateRoute =({ component: Component, pageName: pageName, ...rest }) =>{
 //   handleSideBar(true)
+console.warn(store.data);
+
   return (
     <Route
       {...rest}
       render={props =>{
-          let loggedIn = getPropertyValue(store.getState(), 'user.loggedIn'),
-              defaultPage = pages[getPropertyValue(store.getState(), "data.user.role") + "DefaultPage"],
+          let loggedIn = userInfo() != null,
+              defaultPage = pages[getPropertyValue(userInfo(), "role") + "DefaultPage"],
               access   = checkAccess(pageName);
 
           let result= (loggedIn === true) ? (
@@ -66,9 +74,9 @@ const LoginRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>{
-        let loggedIn  = getPropertyValue(store.getState(), "data.loggedIn"),
-            defaultPage = pages[getPropertyValue(store.getState(), "data.user.role") + "DefaultPage"],
-            result    = (loggedIn === false) ? (
+      let loggedIn = userInfo() != null,
+          defaultPage = pages[getPropertyValue(userInfo(), "role") + "DefaultPage"],
+          result    = (loggedIn === false) ? (
                           <Component {...props} />
                           ) : (
                             <Redirect
@@ -76,9 +84,6 @@ const LoginRoute = ({ component: Component, ...rest }) => (
                                 pathname: defaultPage
                               }}
                             />);
-
-            // if(loggedIn != true)
-            //   checkRememberMeAndLogin();
 
             return result;
       }}

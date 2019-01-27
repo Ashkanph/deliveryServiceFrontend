@@ -1,16 +1,7 @@
 
-export const consts = {
-    changeAvatarBoxColor: [51, 51, 51, 0.6], // '#333333',
-    updateTimeChartsAndTable: 2000, //Health management Update time interval in ms
-    saveReceivedDecoding_statsToStore: 2000, //save packets in ms
-    maxChartDataSize: 20 // length of Health management charts' columns
-    // avatarBoxShadowColor: '#3d9c41',
-    // avatarSideBarBorderBottomColor: "#182026"
-};
-
 export const pages = {
     'managerDefaultPage' : {
-        'hash': '/orders',
+        'hash': '/shipments',
     },
     'bikerDefaultPage' : {
         'hash': '/parcels',
@@ -21,4 +12,20 @@ export const pages = {
     'login' : {
         'hash': '/login',
     },
+    'parcels' : {
+        'hash': '/parcels',
+    },
+    'shipments' : {
+        'hash': '/shipments',
+    },
 };
+
+const restAPIS = {
+      "mainAddress": "http://127.0.0.1:3000/"
+    };
+
+restAPIS.queryAddress   = restAPIS.mainAddress  + "api/v1.0.0/";
+restAPIS.login          = restAPIS.queryAddress + "login";
+restAPIS.shipments      = restAPIS.queryAddress + "shipments";
+
+export {restAPIS};

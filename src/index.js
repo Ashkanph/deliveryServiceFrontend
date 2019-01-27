@@ -12,6 +12,10 @@ import Routes from "./routing/routes.js";
 import history from "./routing/components/history";
 import { ToastContainer } from 'react-toastify';
 
+
+// This only be loaded in the development mode
+require('./style/index.scss');
+
 const app = document.getElementById("app");
 
 // const options = {

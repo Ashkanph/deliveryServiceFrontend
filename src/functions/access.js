@@ -2,7 +2,8 @@
 import { userInfo }   from "../store/actions/data";
 
 const pageAccess = {
-    orders:          ['manager'],
+    shipments:          ["manager"],
+    parcels:            ["biker"],
 };
 
 /**
@@ -11,9 +12,10 @@ const pageAccess = {
  * @param {string} page 
  */
 export function checkAccess(page) {
-    let userRole = userInfo().role;
+    let userRole = userInfo() != null ?
+                    userInfo().role : null;
 
-    if(pageAccess[page].indexOf(userRole) > -1)
+    if(userRole != null && pageAccess[page].indexOf(userRole) > -1)
         return true;
 
     return false;

@@ -39,6 +39,18 @@ var config = {
                 exclude: [/node_modules/, /dest/],
                 include: APP_DIR,
             },
+            // Font files
+            {
+                test: /\.(woff|woff2|ttf|otf)$/,
+                loader: 'file-loader',
+                include: [/fonts/],
+        
+                options: {
+                name: '[hash].[ext]',
+                outputPath: 'css/',
+                publicPath: url => '../css/' + url
+                }
+            }
 		],
     }
 };

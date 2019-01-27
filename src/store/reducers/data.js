@@ -9,8 +9,8 @@ export default function reducer(
         case "user": {
           return Object.assign({}, state, { user: action.data });
         }
-        case "loggedIn": {
-          return Object.assign({}, state, { loggedIn: action.data });
+        case "shipments": {
+          return Object.assign({}, state, { shipments: action.data });
         }
         default: {
           return state;
