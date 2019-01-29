@@ -5,6 +5,9 @@ export default {
   fillTheForm: {
     en: "Please fill the form."
   },
+  assigneeChangedSuccessfully: {
+    en: "Assignee changed successfully."
+  },
   errStatusMsg: {
     "0": {
       en: "successful"
@@ -20,6 +23,9 @@ export default {
     },
     "4": {
       en: "Undefined error."
+    },
+    "5": {
+      en: "Failed to change shipment's assignee."
     },
     default: {
       en: "An error with undefined status occurred."

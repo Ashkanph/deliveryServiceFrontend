@@ -1,0 +1,13 @@
+.myheader {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: $headerHeight;
+    border-bottom: 3px solid;
+
+    .ui.grid>.column:not(.row), .ui.grid>.row>.column {
+        width: inherit;
+    }
+}

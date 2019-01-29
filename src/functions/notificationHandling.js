@@ -22,12 +22,14 @@ export function showErrorMessage(which) {
 }
 
 export function showErrorStatusMessage(status) {
-    if(status != null)
-        toast.error(messages.errStatusMsg[status].en, 
-            {   
-                position: "bottom-right",
-                rtl: false
-            });
+    if(status == null || messages.errStatusMsg[status] == null)
+        status = "default";
+
+    toast.error(messages.errStatusMsg[status].en, 
+        {   
+            position: "bottom-right",
+            rtl: false
+        });
 }
 
 function getMsgText(which) {

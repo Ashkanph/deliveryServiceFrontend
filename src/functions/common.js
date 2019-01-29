@@ -24,4 +24,40 @@ export function getPropertyValue(object, path) {
   
     return temp;
   }
+
+export function statusIcon(status) {
+  let result = {
+    icon: "",
+    color: "",
+    title: ""
+  };
+  if(status == null || status == "")
+    return result;
+  
+  switch (status) {
+    case "WAITING":
+      result.icon = "wait";
+      result.color = "red";
+      result.title = "Waiting";
+      break;
+    case "ASSIGNED":
+      result.icon = "tag";
+      result.title = "Assigned";
+      break;
+    case "PICKED_UP":
+      result.icon = "motorcycle";
+      result.title = "Picked up";
+      break;
+    case "DELIVERED":
+      result.icon = "check circle";
+      result.color = "green";
+      result.title = "Delivered";
+      break;
+  
+    default:
+      return result;
+  }
+
+  return result;
+}
   

@@ -42,7 +42,7 @@ class Login extends Component {
       return;
       
     ajaxQS("login", "POST", {username: input.un, password: input.pw}, 
-            null, (result)=>{
+           (result)=>{
                 if(result.status === 0){
                     setUser({
                         name: result.name,
@@ -105,13 +105,5 @@ class Login extends Component {
     );
   }
 }
-
-// function setProps(store) {
-//   return {
-//     data: store.data,
-//     loggedIn: getPropertyValue(store, 'data.loggedIn')
-//   };
-// }
-// export default connect(setProps)(Login);
 
 export default Login;

@@ -1,10 +1,24 @@
-@import './basic.scss';
+@import './variable.scss';
 
 @import './framework/semantic-ui/grid.scss';
+@import './framework/semantic-ui/transition.scss';
 @import './framework/semantic-ui/header.scss';
 @import './framework/semantic-ui/segment.scss';
 @import './framework/semantic-ui/icon.scss';
 @import './framework/semantic-ui/button.scss';
 @import './framework/semantic-ui/form.scss';
 @import './framework/semantic-ui/input.scss';
+@import './framework/semantic-ui/table.scss';
+@import './framework/semantic-ui/container.scss';
+@import './framework/semantic-ui/divider.scss';
+@import './framework/semantic-ui/menu.scss';
+@import './framework/semantic-ui/dropdown.scss';
+@import './framework/semantic-ui/list.scss';
+
 @import './framework/react-toastify.scss';
+
+@import './basic.scss';
+@import './myheader.scss';
+
+@import './theme.scss';
+

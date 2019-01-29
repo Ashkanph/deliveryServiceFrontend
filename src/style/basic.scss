@@ -10,6 +10,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
   }
   
   html{
@@ -21,4 +22,18 @@
     src: url('/static/assets/fonts/Vazir-Light-v16.woff');
     font-weight: normal;
     font-style: normal
+  }
+
+
+  .ui.grid{
+    margin: 0;
+  }
+
+  .container{
+    padding: 2rem;
+  }
+
+  .shortdivider{
+    width: 10rem;
+    margin: 0.5rem auto !important;
   }

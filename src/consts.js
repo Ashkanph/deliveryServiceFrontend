@@ -28,5 +28,7 @@ restAPIS.queryAddress   = restAPIS.mainAddress  + "api/v1.0.0/";
 restAPIS.login          = restAPIS.queryAddress + "login";
 restAPIS.shipments      = restAPIS.queryAddress + "shipments";
 restAPIS.bikers         = restAPIS.queryAddress + "bikers";
+restAPIS.parcels        = restAPIS.queryAddress + "parcels";
+restAPIS.changeAssignee = restAPIS.queryAddress + "shipments/";
 
 export {restAPIS};

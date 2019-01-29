@@ -31,7 +31,7 @@ class Routes extends Component {
 
 const PrivateRoute =({ component: Component, pageName: pageName, ...rest }) =>{
 //   handleSideBar(true)
-console.warn(store.data);
+// console.warn(store.data);
 
   return (
     <Route
