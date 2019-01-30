@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import { requiredInputsChecker } from "../../functions/form-validation";
-import { ajaxQS } from "../../functions/ajax";
+import { ajaxQS, shipmentsCB } from "../../functions/ajax";
 import { showErrorMessage, 
          showErrorStatusMessage } from "../../functions/notificationHandling";
-import { setUser } from "../../store/actions/data";
+import { setUser, setDataRefreshInterval } from "../../store/actions/data";
 import history from "../components/history";
 import {pages} from "../../consts";
-
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
 class Login extends Component {
@@ -50,6 +49,15 @@ class Login extends Component {
                         id: result.id,
                         token: result.token
                     });
+
+                    if(result.role === "manager"){
+                        // Refresh shipments data every setting.managerPageRefreshRate ms when the user is a manager
+                        setDataRefreshInterval(setInterval(()=>{
+                            console.log('salaaaaaaaaam');
+                            
+                            ajaxQS("shipments", "GET", null, shipmentsCB)
+                        }, setting.managerPageRefreshRate));
+                    }
                     
                     history.push(pages[result.role + "DefaultPage"].hash);
                 }else

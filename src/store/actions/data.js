@@ -42,3 +42,17 @@ export function logout() {
     data: null
   });
 }
+
+export function setDataRefreshInterval(data) {
+  store.dispatch({
+    type: "dataRefreshInterval",
+    data: data
+  });
+}
+
+export function clearDataRefreshInterval(data) {
+  let timeInt = store.getState().data.dataRefreshInterval 
+  if( timeInt != null){
+    clearInterval(timeInt);
+  }
+}

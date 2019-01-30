@@ -51,7 +51,9 @@ export function ajaxQS(name, requestType, inputs, cb) {
 
     xhttp.open(requestType, addr);
     if(name != "login"){
-          xhttp.setRequestHeader("authorization", "JWT " + userInfo().token);
+        if(userInfo() == null)
+            return;
+        xhttp.setRequestHeader("authorization", "JWT " + userInfo().token);
     }
 
     xhttp.onreadystatechange = function() {

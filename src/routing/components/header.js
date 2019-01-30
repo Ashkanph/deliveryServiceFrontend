@@ -5,7 +5,7 @@ import {
     Button,
     Icon
 } from "semantic-ui-react";
-import { logout } from "../../store/actions/data";
+import { logout, clearDataRefreshInterval } from "../../store/actions/data";
 import { ajaxQS } from '../../functions/ajax';
 import { pages } from '../../consts';
 import history from '../components/history';
@@ -27,6 +27,7 @@ class MyHeader extends Component {
                             ajaxQS("logout", "GET", null, (result) => {
                                 logout();
                                 history.push(pages.login.hash);
+                                clearDataRefreshInterval();
                             })
                         }}
                         title="Logout">

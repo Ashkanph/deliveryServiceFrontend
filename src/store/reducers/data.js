@@ -5,6 +5,7 @@ export default function reducer(
       shipments: [],
       bikers: [],
       parcels: [],
+      dataRefreshInterval: null
     },
     action) {
       switch (action.type) {
@@ -19,6 +20,9 @@ export default function reducer(
         }
         case "parcels": {
           return Object.assign({}, state, { parcels: action.data });
+        }
+        case "dataRefreshInterval": {
+          return Object.assign({}, state, { dataRefreshInterval: action.data });
         }
         default: {
           return state;
