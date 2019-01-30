@@ -8,6 +8,12 @@ export default {
   assigneeChangedSuccessfully: {
     en: "Assignee changed successfully."
   },
+  noDatetimeSelected: {
+    en: "No datetime has been selected."
+  },
+  datetimeChangedSuccessfully: {
+    en: "Datetime changed successfully."
+  },
   errStatusMsg: {
     "0": {
       en: "successful"

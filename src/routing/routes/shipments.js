@@ -14,7 +14,8 @@ import {
   Divider,
   Icon,
   Input,
-  List
+  List,
+  Label
 } from "semantic-ui-react";
 
 class Shipments extends Component {
@@ -51,6 +52,8 @@ class Shipments extends Component {
               if(result.status === 0){
                 showSuccessMessage("assigneeChangedSuccessfully");
                 delete state.changedAssignee[shipment_id];
+
+                //Set the state, and refresh the list
                 this.setState(state, ajaxQS("shipments", "GET", null, shipmentsCB));
               }else
                 showErrorStatusMessage(result.status);
@@ -107,20 +110,22 @@ class Shipments extends Component {
                 
             return (
                 <Table.Row textAlign="center" key={index}>
-                  <Table.Cell>
-                    <Icon bordered name={ icon.icon}
-                                   size="big" 
-                                   color={icon.color}
-                                   title={icon.title} />
+                  <Table.Cell collapsing>
+                    <Icon name={ icon.icon}
+                          size="big" 
+                          color={icon.color}
+                          title={icon.title} />
                   </Table.Cell>
                   <Table.Cell>
-                    <span title="Origin">
-                      { item.origin }
-                    </span>
+                    <Label title="Origin">
+                      Origin
+                      <Label.Detail>{ item.origin }</Label.Detail>
+                    </Label>
                     <Divider className="shortdivider" />
-                    <span title="Destination">
-                      { item.destination }
-                    </span>
+                    <Label title="Destination">
+                      Dest.
+                      <Label.Detail>{ item.destination }</Label.Detail>
+                    </Label>
                   </Table.Cell>
                   <Table.Cell>
                     { assignee }

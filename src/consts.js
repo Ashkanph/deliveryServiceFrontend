@@ -21,7 +21,7 @@ export const pages = {
 };
 
 const restAPIS = {
-      "mainAddress": "http://127.0.0.1:3000/"
+      "mainAddress": setting.backendMainAddress
     };
 
 restAPIS.queryAddress   = restAPIS.mainAddress  + "api/v1.0.0/";
