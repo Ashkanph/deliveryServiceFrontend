@@ -30,5 +30,6 @@ restAPIS.shipments      = restAPIS.queryAddress + "shipments";
 restAPIS.bikers         = restAPIS.queryAddress + "bikers";
 restAPIS.parcels        = restAPIS.queryAddress + "parcels";
 restAPIS.changeAssignee = restAPIS.queryAddress + "shipments/";
+restAPIS.logout         = restAPIS.queryAddress + "logout";
 
 export {restAPIS};

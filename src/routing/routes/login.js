@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import { getPropertyValue } from "../../functions/common";
 import { requiredInputsChecker } from "../../functions/form-validation";
 import { ajaxQS } from "../../functions/ajax";
 import { showErrorMessage, 

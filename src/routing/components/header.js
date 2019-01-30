@@ -6,6 +6,9 @@ import {
     Icon
 } from "semantic-ui-react";
 import { logout } from "../../store/actions/data";
+import { ajaxQS } from '../../functions/ajax';
+import { pages } from '../../consts';
+import history from '../components/history';
 
 // import ThemeSelector from "../../frontend-3rdparties/React/semanticui/themeSelector/themeSelector";
 
@@ -21,7 +24,10 @@ class MyHeader extends Component {
                 <Button icon color="red"
                         floated="right"
                         onClick={e => {
-                            logout();
+                            ajaxQS("logout", "GET", null, (result) => {
+                                logout();
+                                history.push(pages.login.hash);
+                            })
                         }}
                         title="Logout">
                     <Icon   name="log out" 

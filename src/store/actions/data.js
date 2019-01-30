@@ -37,10 +37,6 @@ export function setBikers(data) {
 }
 
 export function logout() {
-  if(store.getState().data.user == null){
-    console.log('No user in store! logout.');
-    return;
-  }
   store.dispatch({
     type: "user",
     data: null
