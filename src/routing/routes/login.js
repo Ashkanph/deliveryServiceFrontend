@@ -6,7 +6,15 @@ import { showErrorMessage,
 import { setUser, setDataRefreshInterval } from "../../store/actions/data";
 import history from "../components/history";
 import {pages, restAPIS} from "../../consts";
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
+
+import {
+    Button,
+    Header,
+    Grid,
+    Segment,
+    Form
+  } from "semantic-ui-react";
+
 
 class Login extends Component {
   constructor(props) {

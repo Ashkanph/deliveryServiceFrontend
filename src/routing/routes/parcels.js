@@ -8,6 +8,8 @@ import { showErrorMessage, showSuccessMessage,
           showErrorStatusMessage } from "../../functions/notificationHandling";
 import Myheader from "../components/myheader";
 import {restAPIS} from "../../consts";
+import DatePicker from "react-datepicker";
+
 import {
   Container,
   Table,
@@ -15,9 +17,9 @@ import {
   Divider,
   Icon,
   Header,
-  List
+  List,
 } from "semantic-ui-react";
-import DatePicker from "react-datepicker";
+
 
 class Parcels extends Component {
   constructor(props) {
