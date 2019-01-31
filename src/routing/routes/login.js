@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import { requiredInputsChecker } from "../../functions/form-validation";
-import { ajaxQS, shipmentsCB } from "../../functions/ajax";
+import { ajaxQS, shipmentsCB, parcelsCB } from "../../functions/ajax";
 import { showErrorMessage, 
          showErrorStatusMessage } from "../../functions/notificationHandling";
 import { setUser, setDataRefreshInterval } from "../../store/actions/data";
 import history from "../components/history";
-import {pages} from "../../consts";
+import {pages, restAPIS} from "../../consts";
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
 class Login extends Component {
@@ -53,10 +53,13 @@ class Login extends Component {
                     if(result.role === "manager"){
                         // Refresh shipments data every setting.managerPageRefreshRate ms when the user is a manager
                         setDataRefreshInterval(setInterval(()=>{
-                            console.log('salaaaaaaaaam');
-                            
                             ajaxQS("shipments", "GET", null, shipmentsCB)
                         }, setting.managerPageRefreshRate));
+                    }else{
+                        // Refresh the biker's parcel data every setting.bikerPageRefreshRate ms when the user is a biker
+                        setDataRefreshInterval(setInterval(()=>{
+                            ajaxQS(restAPIS.parcels + "/" + result.id, "GET", null, parcelsCB);
+                        }, setting.bikerPageRefreshRate));
                     }
                     
                     history.push(pages[result.role + "DefaultPage"].hash);
