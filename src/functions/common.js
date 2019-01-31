@@ -46,7 +46,7 @@ export function statusIcon(status) {
       break;
     case "PICKED_UP":
       result.icon = "motorcycle";
-      result.title = "Picked up";
+      result.title = "Pickedup";
       break;
     case "DELIVERED":
       result.icon = "check circle";

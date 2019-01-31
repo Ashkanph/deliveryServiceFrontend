@@ -1,7 +1,7 @@
 
 export function humanizeTimestamp(ts, dateDelimeter, timeDelimeter) {
     if (ts == null || ts === '') 
-        return '';
+        return '-';
     
     dateDelimeter = dateDelimeter || setting.dateDelimeter;
     timeDelimeter = timeDelimeter || setting.timeDelimeter;

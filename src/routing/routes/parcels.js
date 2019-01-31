@@ -6,7 +6,7 @@ import { humanizeTimestamp } from "../../functions/datetime";
 import {statusIcon, getPropertyValue} from "../../functions/common";
 import { showErrorMessage, showSuccessMessage,
           showErrorStatusMessage } from "../../functions/notificationHandling";
-import Header from "../components/header";
+import Myheader from "../components/myheader";
 import {restAPIS} from "../../consts";
 import {
   Container,
@@ -14,6 +14,7 @@ import {
   Button,
   Divider,
   Icon,
+  Header,
   Input,
   List
 } from "semantic-ui-react";
@@ -166,7 +167,7 @@ class Parcels extends Component {
     return (
         <React.Fragment>
           
-          <Header pageTitle="Parcels"/>
+          <Myheader pageTitle="Parcels"/>
           <Container className="text-centered">
 
             <Table  sortable striped
