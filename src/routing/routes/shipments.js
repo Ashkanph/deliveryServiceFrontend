@@ -259,7 +259,7 @@ class Shipments extends Component {
                 <Table.Row>
                   <Table.HeaderCell colSpan={5} textAlign="center">
 
-                    {/* Icon legend */}
+                    {/* Icons' legend */}
                     <List divided horizontal 
                           size="miny" 
                           className="users-legend">

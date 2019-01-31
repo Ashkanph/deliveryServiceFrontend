@@ -96,10 +96,6 @@ class Parcels extends Component {
                 timeCaption="time"
                 placeholderText= { whichone == "pickup" ? "Pickup time" : "Delivery time" }
             />
-            <Button icon="save"
-                shipment_id={item.id}
-                whichone={whichone}
-                onClick={this.saveDatetime}  />
         </React.Fragment>
       );
   }
@@ -115,16 +111,20 @@ class Parcels extends Component {
           .map((item, index) => {
             let icon          = statusIcon(item.status),
                 pickupTime    = this.datetimeElements(item, "pickup"),
+                whichone      = getPropertyValue(item, "pickup") != "" ?
+                                  "delivery" : "pickup",
+                disableSaveBtn = getPropertyValue(item, "pickup") != "" &&
+                                 getPropertyValue(item, "delivery") != "",
                 deliveryTime  = getPropertyValue(item, "pickup") != "" ? 
                                   this.datetimeElements(item, "delivery") : "";
                 
             return (
                 <Table.Row textAlign="center" key={index}>
                   <Table.Cell collapsing>
-                    <Icon bordered name={ icon.icon}
-                                   size="big" 
-                                   color={icon.color}
-                                   title={icon.title} />
+                    <Icon name={ icon.icon}
+                          size="big" 
+                          color={icon.color}
+                          title={icon.title} />
                   </Table.Cell>
                   <Table.Cell>
                     <span title="Origin">
@@ -141,6 +141,14 @@ class Parcels extends Component {
                   <Table.Cell>
                     { deliveryTime }
                   </Table.Cell>
+                  <Table.Cell>
+                    <Button icon="save"
+                        shipment_id={item.id}
+                        whichone={whichone}
+                        title={"Save " + whichone + " time"}
+                        onClick={this.saveDatetime}  
+                        disabled = {disableSaveBtn} />
+                  </Table.Cell>
                 </Table.Row>
               );
             }
@@ -148,7 +156,7 @@ class Parcels extends Component {
       } else {
         rows = (
           <Table.Row >
-            <Table.Cell colSpan="4">
+            <Table.Cell colSpan="5">
               <Header textAlign="center" size='medium'>
                 No parcels available!
               </Header>
@@ -171,12 +179,11 @@ class Parcels extends Component {
           <Container className="text-centered">
 
             <Table  sortable striped
-                    className="parcels-table"
                     style={{ marginTop: "3rem" }}
                     textAlign="left">
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell colSpan={4} width={10}>
+                  <Table.HeaderCell colSpan={5} width={16}>
                     <Input icon='search' 
                       placeholder="Search"
                       className="light-color search"
@@ -196,39 +203,45 @@ class Parcels extends Component {
               <Table.Body>
                 {tableRow}
               </Table.Body>
+
+              <Table.Footer fullWidth>
+                <Table.Row>
+                  <Table.HeaderCell colSpan={5} textAlign="center">
+                    {/* Icons' legend */}
+                    <List divided horizontal 
+                          size="miny" 
+                          className="users-legend">
+                      <List.Item>
+                        <Icon name="wait" />
+                        <List.Content>
+                          <List.Header>Waiting</List.Header>
+                        </List.Content>
+                      </List.Item>
+                      <List.Item>
+                        <Icon name="tag" />
+                        <List.Content>
+                          <List.Header>Assigned</List.Header>
+                        </List.Content>
+                      </List.Item>
+                      <List.Item>
+                        <Icon name="motorcycle" />
+                        <List.Content>
+                          <List.Header>Picked up</List.Header>
+                        </List.Content>
+                      </List.Item>
+                      <List.Item>
+                      <Icon name="check" /> 
+                        <List.Content>
+                          <List.Header>Delivered</List.Header>
+                        </List.Content>
+                      </List.Item>
+                    </List>
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Footer>
+
             </Table>
 
-            <Divider />
-
-            {/* Icon legend */}
-            <List divided horizontal 
-                  size="miny" 
-                  className="users-legend">
-              <List.Item>
-                <Icon name="wait" />
-                <List.Content>
-                  <List.Header>Waiting</List.Header>
-                </List.Content>
-              </List.Item>
-              <List.Item>
-                <Icon name="tag" />
-                <List.Content>
-                  <List.Header>Assigned</List.Header>
-                </List.Content>
-              </List.Item>
-              <List.Item>
-                <Icon name="motorcycle" />
-                <List.Content>
-                  <List.Header>Picked up</List.Header>
-                </List.Content>
-              </List.Item>
-              <List.Item>
-              <Icon name="check" /> 
-                <List.Content>
-                  <List.Header>Delivered</List.Header>
-                </List.Content>
-              </List.Item>
-            </List>
           </Container>
       
       </React.Fragment>
