@@ -260,7 +260,7 @@ class Shipments extends Component {
 
                     {/* Icons' legend */}
                     <List divided horizontal 
-                          size="miny" 
+                          size="small" 
                           className="users-legend">
                       <List.Item>
                         <Icon name="wait" />

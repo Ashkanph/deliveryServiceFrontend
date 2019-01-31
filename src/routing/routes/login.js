@@ -82,7 +82,7 @@ class Login extends Component {
             `}</style>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 450, margin: "0 10px" }}>
-                    <Header as='h2' color='teal' textAlign='center'>
+                    <Header as='h2' color='grey' textAlign='center'>
                         Delivery Service
                     </Header>
                     <Form onSubmit={this.loginSubmit} size='large'>
@@ -104,7 +104,7 @@ class Login extends Component {
                                 type='password'
                                 />
 
-                            <Button color='teal' fluid size='large'>
+                            <Button color='grey' fluid size='large'>
                                 Login
                             </Button>
                         </Segment>

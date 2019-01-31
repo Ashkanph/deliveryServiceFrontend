@@ -149,7 +149,7 @@ class Parcels extends Component {
                   <Table.Cell collapsing>
                     <Icon name={ icon.icon}
                           size="big" 
-                          color={icon.color}
+                          color={icon.color != null ? icon.color : "grey"}
                           title={icon.title} />
                   </Table.Cell>
                   <Table.Cell>
@@ -257,7 +257,7 @@ class Parcels extends Component {
                   <Table.HeaderCell colSpan={5} textAlign="center">
                     {/* Icons' legend */}
                     <List divided horizontal 
-                          size="miny" 
+                          size="small" 
                           className="users-legend">
                       <List.Item>
                         <Icon name="wait" />
