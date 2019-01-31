@@ -15,7 +15,6 @@ import {
   Divider,
   Icon,
   Header,
-  Input,
   List
 } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
@@ -25,17 +24,45 @@ class Parcels extends Component {
     super(props);
     this.state = {
       datetimes: {},
+      statusFilter:{
+        WAITING: true, 
+        ASSIGNED: true, 
+        PICKED_UP: true, 
+        DELIVERED: true
+      }
     };
 
     this.createRows         = this.createRows.bind(this);
     this.saveDatetime       = this.saveDatetime.bind(this);
     this.handleDatetimeChange = this.handleDatetimeChange.bind(this);
     this.saveDatetime       = this.saveDatetime.bind(this);
+    this.handleStatusFilter = this.handleStatusFilter.bind(this);
+    this.filterParcels      = this.filterParcels.bind(this);
   }
 
   componentDidMount(){
     let bikerID = userInfo().id;
     ajaxQS(restAPIS.parcels + "/" + bikerID, "GET", null, parcelsCB);
+  }
+
+  handleStatusFilter(status){
+    let state = this.state;
+    state.statusFilter[status] = !state.statusFilter[status];
+    this.setState(state);
+  }
+
+  filterParcels(){
+    let { parcels } = this.props,
+        {statusFilter} = this.state,
+        filteredParcels = [];
+
+    if(parcels != null){
+      filteredParcels = parcels.filter(item => {
+        return statusFilter[item.status]
+      } );
+    }
+    
+    return filteredParcels;
   }
 
   handleDatetimeChange(date, shipment_id, whichone) {
@@ -102,8 +129,7 @@ class Parcels extends Component {
 
   createRows(){
       let rows = <Table.Row/>,
-          {parcels} = this.props,
-          filteredData = parcels; //this.filterUsers();
+          filteredData = this.filterParcels();
  
       if (filteredData != null && filteredData.length > 0) {
         rows = 
@@ -169,34 +195,56 @@ class Parcels extends Component {
 
 
   render() {
-    let state = this.state,
-        tableRow = this.createRows();
+    let tableRow = this.createRows(),
+        { WAITING, ASSIGNED, PICKED_UP, DELIVERED } = this.state.statusFilter;
+
 
     return (
         <React.Fragment>
           
           <Myheader pageTitle="Parcels"/>
-          <Container className="text-centered">
+          <Container>
 
-            <Table  sortable striped
-                    style={{ marginTop: "3rem" }}
-                    textAlign="left">
+            <Table  stackable striped
+                    style={{ marginTop: "4rem" }}
+                    textAlign="center">
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell colSpan={5} width={16}>
-                    <Input icon='search' 
-                      placeholder="Search"
-                      className="light-color search"
-                      name = "usernameSearch" 
-                      onChange={this.handleChangeInputValue}/>
-                    <Button 
-                            onClick={() => this.handleSort('username')}
-                            className="secondary-button" 
-                            title="Sort"
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('DELIVERED')}
+                            className="filter-status-btn"
+                            title="Filter delivered"
+                            color={ DELIVERED ? "teal" : "grey" }
                             icon circular>
-                      <Icon name="sort amount down" />
+                      <Icon name="check" />
+                    </Button>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('PICKED_UP')}
+                            className="filter-status-btn"
+                            title="Filter pickedup"
+                            color={ PICKED_UP ? "teal" : "grey" }
+                            icon circular>
+                      <Icon name="motorcycle" />
+                    </Button>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('ASSIGNED')}
+                            className="filter-status-btn"
+                            title="Filter assigned"
+                            color={ ASSIGNED ? "teal" : "grey" }
+                            icon circular>
+                      <Icon name="tag" />
+                    </Button>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('WAITING')}
+                            className="filter-status-btn"
+                            title="Filter waiting"
+                            color={ WAITING ? "teal" : "grey" }
+                            icon circular>
+                      <Icon name="wait" />
                     </Button>
                   </Table.HeaderCell>
+                  <Divider  hidden/>
                 </Table.Row>
               </Table.Header>
 

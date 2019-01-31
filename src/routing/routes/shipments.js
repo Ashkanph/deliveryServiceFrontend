@@ -130,7 +130,6 @@ class Shipments extends Component {
 
   createRows(){
       let rows = <Table.Row/>,
-          {shipments, bikers} = this.props,
           filteredData = this.filterShipments();
  
       if (filteredData != null && filteredData.length > 0) {
@@ -206,7 +205,7 @@ class Shipments extends Component {
         <React.Fragment>
           
           <Myheader pageTitle="Shipments"/>
-          <Container className="text-centered">
+          <Container>
 
             <Table  stackable striped
                     style={{ marginTop: "4rem" }}
@@ -214,21 +213,13 @@ class Shipments extends Component {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell colSpan={5} width={16}>
-                    <Button floated="right"
-                            onClick={() => this.handleStatusFilter('WAITING')}
+                  <Button floated="right"
+                            onClick={() => this.handleStatusFilter('DELIVERED')}
                             className="filter-status-btn"
-                            title="Filter waiting"
-                            color={ WAITING ? "teal" : "grey" }
+                            title="Filter delivered"
+                            color={ DELIVERED ? "teal" : "grey" }
                             icon circular>
-                      <Icon name="wait" />
-                    </Button>
-                    <Button floated="right"
-                            onClick={() => this.handleStatusFilter('ASSIGNED')}
-                            className="filter-status-btn"
-                            title="Filter assigned"
-                            color={ ASSIGNED ? "teal" : "grey" }
-                            icon circular>
-                      <Icon name="tag" />
+                      <Icon name="check" />
                     </Button>
                     <Button floated="right"
                             onClick={() => this.handleStatusFilter('PICKED_UP')}
@@ -239,12 +230,20 @@ class Shipments extends Component {
                       <Icon name="motorcycle" />
                     </Button>
                     <Button floated="right"
-                            onClick={() => this.handleStatusFilter('DELIVERED')}
+                            onClick={() => this.handleStatusFilter('ASSIGNED')}
                             className="filter-status-btn"
-                            title="Filter delivered"
-                            color={ DELIVERED ? "teal" : "grey" }
+                            title="Filter assigned"
+                            color={ ASSIGNED ? "teal" : "grey" }
                             icon circular>
-                      <Icon name="check" />
+                      <Icon name="tag" />
+                    </Button>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('WAITING')}
+                            className="filter-status-btn"
+                            title="Filter waiting"
+                            color={ WAITING ? "teal" : "grey" }
+                            icon circular>
+                      <Icon name="wait" />
                     </Button>
                   </Table.HeaderCell>
                   <Divider  hidden/>
