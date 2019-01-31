@@ -14,6 +14,9 @@ export default {
   datetimeChangedSuccessfully: {
     en: "Datetime changed successfully."
   },
+  noAssigneeSelected: {
+    en: "You have not selected any assignee for this shipment."
+  },
   errStatusMsg: {
     "0": {
       en: "successful"

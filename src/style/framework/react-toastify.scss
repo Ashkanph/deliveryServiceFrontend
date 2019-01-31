@@ -63,7 +63,7 @@
       direction: rtl; }
     .Toastify__toast--default {
       background: #fff;
-      color: #aaa; }
+      color: #fff; }
     .Toastify__toast--info {
       background: #3498db; }
     .Toastify__toast--success {
@@ -73,6 +73,7 @@
     .Toastify__toast--error {
       background: #e74c3c; }
     .Toastify__toast-body {
+      color: white !important;
       margin: auto 0;
       -ms-flex: 1;
           flex: 1; }

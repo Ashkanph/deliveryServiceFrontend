@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {ajaxQS, shipmentsCB, bikersCB} from "../../functions/ajax";
 import {statusIcon, getPropertyValue} from "../../functions/common";
-import { showSuccessMessage,
-         showErrorStatusMessage } from "../../functions/notificationHandling";
+import {  showErrorMessage,
+          showSuccessMessage,
+          showErrorStatusMessage } from "../../functions/notificationHandling";
 import Myheader from "../components/myheader";
 import {restAPIS} from "../../consts";
 import { humanizeTimestamp } from "../../functions/datetime";
@@ -14,27 +15,30 @@ import {
   Button,
   Divider,
   Icon,
-  Input,
   Header,
   List,
   Label,
-  Item,
-  Card,
-  Grid,
-  Segment
 } from "semantic-ui-react";
 
 class Shipments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      changedAssignee: {}
+      changedAssignee: {},
+      statusFilter:{
+        WAITING: true, 
+        ASSIGNED: true, 
+        PICKED_UP: true, 
+        DELIVERED: true
+      }
     };
 
     this.createRows           = this.createRows.bind(this);
     this.changeAssignee       = this.changeAssignee.bind(this);
     this.handleAssigneeChange = this.handleAssigneeChange.bind(this);
     this.assigneeElements     = this.assigneeElements.bind(this);
+    this.handleStatusFilter   = this.handleStatusFilter.bind(this);
+    this.filterShipments      = this.filterShipments.bind(this);
   }
 
   componentDidMount(){
@@ -49,6 +53,11 @@ class Shipments extends Component {
   }
 
   changeAssignee(e, {shipment_id}) {
+    if(this.state.changedAssignee[shipment_id] == null){
+      showErrorMessage("noAssigneeSelected");
+      return;
+    }
+
     let state = this.state,
         queryAddress = restAPIS.shipments + "/" + shipment_id + 
                         "?newAssigneeID=" + state.changedAssignee[shipment_id];
@@ -64,6 +73,26 @@ class Shipments extends Component {
               }else
                 showErrorStatusMessage(result.status);
             }.bind(this));
+  }
+
+  handleStatusFilter(status){
+    let state = this.state;
+    state.statusFilter[status] = !state.statusFilter[status];
+    this.setState(state);
+  }
+
+  filterShipments(){
+    let { shipments } = this.props,
+        {statusFilter} = this.state,
+        filteredShipments = [];
+
+    if(shipments != null){
+      filteredShipments = shipments.filter(item => {
+        return statusFilter[item.status]
+      } );
+    }
+    
+    return filteredShipments;
   }
 
   assigneeElements(item){
@@ -102,23 +131,21 @@ class Shipments extends Component {
   createRows(){
       let rows = <Table.Row/>,
           {shipments, bikers} = this.props,
-          filteredData = shipments; //this.filterUsers();
+          filteredData = this.filterShipments();
  
       if (filteredData != null && filteredData.length > 0) {
         rows = 
-        this.props.shipments
+        filteredData
           .map((item, index) => {
             let icon      = statusIcon(item.status),
                 assignee  = this.assigneeElements(item);
                 
             return (
-
-
                 <Table.Row textAlign="center" key={index}>
                   <Table.Cell collapsing>
                     <Icon name={ icon.icon}
                           size="big" 
-                          color={icon.color}
+                          color={icon.color != null ? icon.color : "grey"}
                           title={icon.title} />
                   </Table.Cell>
                   <Table.Cell>
@@ -148,7 +175,9 @@ class Shipments extends Component {
                     <Button icon="save"
                             shipment_id={item.id}
                             onClick={this.changeAssignee}  
-                            disabled={getPropertyValue(item, "assigneeID") != ""}/>
+                            disabled={getPropertyValue(item, "assigneeID") != ""}
+                            title={ getPropertyValue(item, "assigneeID") == "" ?
+                                    "Save selected assignee" : "" }/>
                   </Table.Cell>
                 </Table.Row>
               );
@@ -170,7 +199,8 @@ class Shipments extends Component {
 
 
   render() {
-    let tableRow = this.createRows();
+    let tableRow = this.createRows(),
+        { WAITING, ASSIGNED, PICKED_UP, DELIVERED } = this.state.statusFilter;
 
     return (
         <React.Fragment>
@@ -178,26 +208,46 @@ class Shipments extends Component {
           <Myheader pageTitle="Shipments"/>
           <Container className="text-centered">
 
-            <Table  stackable  sortable striped
-                    className="shipments-table"
-                    style={{ marginTop: "3rem" }}
-                    textAlign="left">
+            <Table  stackable striped
+                    style={{ marginTop: "4rem" }}
+                    textAlign="center">
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell colSpan={5} width={10}>
-                    <Input icon='search' 
-                      placeholder="Search"
-                      className="light-color search"
-                      name = "usernameSearch" 
-                      onChange={this.handleChangeInputValue}/>
-                    <Button 
-                            onClick={() => this.handleSort('username')}
-                            className="secondary-button" 
-                            title="Sort"
+                  <Table.HeaderCell colSpan={5} width={16}>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('WAITING')}
+                            className="filter-status-btn"
+                            title="Filter waiting"
+                            color={ WAITING ? "teal" : "grey" }
                             icon circular>
-                      <Icon name="sort amount down" />
+                      <Icon name="wait" />
+                    </Button>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('ASSIGNED')}
+                            className="filter-status-btn"
+                            title="Filter assigned"
+                            color={ ASSIGNED ? "teal" : "grey" }
+                            icon circular>
+                      <Icon name="tag" />
+                    </Button>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('PICKED_UP')}
+                            className="filter-status-btn"
+                            title="Filter pickedup"
+                            color={ PICKED_UP ? "teal" : "grey" }
+                            icon circular>
+                      <Icon name="motorcycle" />
+                    </Button>
+                    <Button floated="right"
+                            onClick={() => this.handleStatusFilter('DELIVERED')}
+                            className="filter-status-btn"
+                            title="Filter delivered"
+                            color={ DELIVERED ? "teal" : "grey" }
+                            icon circular>
+                      <Icon name="check" />
                     </Button>
                   </Table.HeaderCell>
+                  <Divider  hidden/>
                 </Table.Row>
               </Table.Header>
 
@@ -238,34 +288,10 @@ class Shipments extends Component {
                         </List.Content>
                       </List.Item>
                     </List>
-
-                  {/* <Table.HeaderCell>
-                    <Icon name="wait">
-                      Waiting
-                    </Icon>
-                  </Table.HeaderCell>
-                  <Table.HeaderCell>
-                    <Icon name="tag">
-                      Assigned
-                    </Icon>
-                  </Table.HeaderCell>
-                  <Table.HeaderCell>
-                    <Icon name="motorcycle">
-                      Picked-up
-                    </Icon>
-                  </Table.HeaderCell>
-                  <Table.HeaderCell>
-                    <Icon name="check">
-                      Delivered
-                    </Icon> */}
                   </Table.HeaderCell>
                 </Table.Row>
               </Table.Footer>
             </Table>
-
-            <Divider />
-
-            
           </Container>
       
       </React.Fragment>

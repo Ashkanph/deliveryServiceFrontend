@@ -5,7 +5,7 @@ import messages from '../assets/messages';
 
 export function showSuccessMessage(which) {
     if(which != null)
-        toast.info(getMsgText(which), 
+        toast.success(getMsgText(which), 
             {   
                 position: "bottom-right" ,
                 rtl: false
