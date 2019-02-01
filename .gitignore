@@ -3,7 +3,10 @@
 /node_modules
 
 # production
-/dist/static
+/dist/static/bundle.js
+/dist/static/style.css
+# There must not be binary files in the git repository, I know that,
+# but for this project I have to let the fonts be i nthe repository.
 
 # misc.
 package-lock.json
