@@ -2,7 +2,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'dest/');
+var BUILD_DIR = path.resolve(__dirname, 'dist/');
 var APP_DIR = path.resolve(__dirname, 'src/');
 
 var config = {
@@ -14,7 +14,7 @@ var config = {
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: BUILD_DIR, 
+        contentBase: BUILD_DIR,
         compress: true,
         port: 4000,
         historyApiFallback: true
@@ -24,7 +24,7 @@ var config = {
 			// Transform all ES6 files to plain old ES5.
 			{
 				test: /\.(js|jsx)$/,
-				exclude: [/node_modules/, /dest/],
+				exclude: [/node_modules/, /dist/],
 				loader: 'babel-loader',
                 include: APP_DIR,
                 query: {
@@ -36,21 +36,9 @@ var config = {
 				test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader', 'sass-loader',
                           'sass-loader?sourceMap'],
-                exclude: [/node_modules/, /dest/],
+                exclude: [/node_modules/, /dist/],
                 include: APP_DIR,
             },
-            // Font files
-            {
-                test: /\.(woff|woff2|ttf|otf)$/,
-                loader: 'file-loader',
-                include: [/fonts/],
-        
-                options: {
-                name: '[hash].[ext]',
-                outputPath: 'css/',
-                publicPath: url => '../css/' + url
-                }
-            }
 		],
     }
 };

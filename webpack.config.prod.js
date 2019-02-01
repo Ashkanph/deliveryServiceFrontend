@@ -2,7 +2,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'dest/static/');
+var BUILD_DIR = path.resolve(__dirname, 'dist/static/');
 var APP_DIR = path.resolve(__dirname, 'src/');
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -10,7 +10,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var config = {
     mode: 'production',
-    entry: ["babel-polyfill", APP_DIR + '/index.js'],
+    entry: ["@babel/polyfill", APP_DIR + '/index.js'],
     output: {
         path: BUILD_DIR,
         filename: 'bundle.js'
@@ -20,7 +20,7 @@ var config = {
 			// Transform all ES6 files to plain old ES5.
 			{
 				test: /\.(js|jsx)$/,
-				exclude: [/node_modules/, /dest/],
+				exclude: [/node_modules/, /dist/],
 				loader: 'babel-loader',
                 include: APP_DIR,
                 query: {
@@ -35,7 +35,7 @@ var config = {
                   'css-loader',
                   'sass-loader',
                 ],
-            }
+            },
 		],
 	},
     optimization: {

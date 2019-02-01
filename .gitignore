@@ -3,7 +3,7 @@
 /node_modules
 
 # production
-/dest/static
+/dist/static
 
 # misc.
 package-lock.json
