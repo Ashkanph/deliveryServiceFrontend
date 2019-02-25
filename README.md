@@ -1,5 +1,5 @@
 
-A react-based web application for [this backend](https://github.com/Ashkanph/deliveryServiceBackend) (A delivery service).
+A react-based web application for [this backend](https://github.com/Ashkanph/deliveryServiceBackend) (A delivery service). The description of the project can be found in this document: [HR-FrontendDeveloperTest-201118-1829-362.pdf](https://github.com/Ashkanph/deliveryServiceFrontend/files/2902485/HR-FrontendDeveloperTest-201118-1829-362.pdf)
 
 ## Usage
 
